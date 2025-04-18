@@ -1,5 +1,6 @@
 package com.example.bank_card_management.service;
 
+import com.example.bank_card_management.dto.LoginRequest;
 import com.example.bank_card_management.model.User;
 import com.example.bank_card_management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,21 +35,21 @@ public class UserService
         }
     }
 
-    public String verify(User user)
+    public String verify(LoginRequest loginRequest)
     {
         try
         {
             Authentication authentication = authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
             if (authentication.isAuthenticated())
             {
-                return jwtService.generateToken(user.getEmail());
+                return jwtService.generateToken(loginRequest.getEmail());
             }
         }
         catch (Exception e)
         {
-            throw new RuntimeException("Authentication failed for user: " + user.getEmail());
+            throw new RuntimeException("Authentication failed for user: " + loginRequest.getEmail());
         }
         return "FAILED";
     }

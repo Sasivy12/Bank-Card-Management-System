@@ -1,5 +1,6 @@
 package com.example.bank_card_management.controller;
 
+import com.example.bank_card_management.dto.LoginRequest;
 import com.example.bank_card_management.model.User;
 import com.example.bank_card_management.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,8 @@ public class UserController
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user)
+    public String login(@RequestBody LoginRequest loginRequest)
     {
-        return userService.verify(user);
+        return userService.verify(loginRequest);
     }
 }
