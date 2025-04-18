@@ -1,33 +1,24 @@
 package com.example.bank_card_management.controller;
 
-import com.example.bank_card_management.dto.LoginRequest;
 import com.example.bank_card_management.model.User;
 import com.example.bank_card_management.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/user")
 @RequiredArgsConstructor
-@RequestMapping()
 public class UserController
 {
     private final UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody User user)
+    @GetMapping()
+    public List<User> getAllUsers()
     {
-        userService.register(user);
-
-        return ResponseEntity.ok("User " + user.getEmail() + " registered successfully");
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest)
-    {
-        return userService.verify(loginRequest);
+        return userService.getAllUsers();
     }
 }
