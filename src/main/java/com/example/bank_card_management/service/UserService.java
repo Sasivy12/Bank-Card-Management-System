@@ -1,5 +1,6 @@
 package com.example.bank_card_management.service;
 
+import com.example.bank_card_management.model.BankCard;
 import com.example.bank_card_management.model.User;
 import com.example.bank_card_management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,33 @@ public class UserService
                 () -> new RuntimeException("User with id " + userId + " not found"));
 
         return user;
+    }
+
+    public void deleteASpecificUser(User user)
+    {
+        userRepository.delete(user);
+    }
+
+    public void updateASpecificUser(User updatedUser)
+    {
+        User existingUser = userRepository.findById(updatedUser.getId())
+                .orElseThrow(() -> new RuntimeException("User with id " + updatedUser.getId() + " not found"));
+
+        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setFullName(updatedUser.getFullName());
+        existingUser.setStatus(updatedUser.getStatus());
+        existingUser.setRole(updatedUser.getRole());
+
+        existingUser.getCards().clear();
+        if (updatedUser.getCards() != null)
+        {
+            for (BankCard card : updatedUser.getCards())
+            {
+                card.setCardHolder(existingUser);
+                existingUser.getCards().add(card);
+            }
+        }
+
+        userRepository.save(existingUser);
     }
 }

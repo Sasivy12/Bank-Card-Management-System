@@ -3,10 +3,8 @@ package com.example.bank_card_management.controller;
 import com.example.bank_card_management.model.User;
 import com.example.bank_card_management.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,21 @@ public class UserController
     public User getASpecificUser(@PathVariable Long userId)
     {
         return userService.getASpecificUser(userId);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<String> deleteASpecificUser(@RequestBody User user)
+    {
+        userService.deleteASpecificUser(user);
+
+        return ResponseEntity.ok("User " + user.getEmail() + " successfully deleted");
+    }
+
+    @PutMapping()
+    public ResponseEntity<String> updateASpecificUser(@RequestBody User user)
+    {
+        userService.updateASpecificUser(user);
+
+        return ResponseEntity.ok("User " + user.getEmail() + " successfully updated");
     }
 }
