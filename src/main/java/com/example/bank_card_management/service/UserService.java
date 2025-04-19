@@ -1,5 +1,6 @@
 package com.example.bank_card_management.service;
 
+import com.example.bank_card_management.exception.UserNotFoundException;
 import com.example.bank_card_management.model.BankCard;
 import com.example.bank_card_management.model.User;
 import com.example.bank_card_management.repository.UserRepository;
@@ -27,7 +28,7 @@ public class UserService
     public User getASpecificUser(Long userId)
     {
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new RuntimeException("User with id " + userId + " not found"));
+                () -> new UserNotFoundException("User with id " + userId + " not found"));
 
         return user;
     }
@@ -40,7 +41,7 @@ public class UserService
     public void updateASpecificUser(User updatedUser)
     {
         User existingUser = userRepository.findById(updatedUser.getId())
-                .orElseThrow(() -> new RuntimeException("User with id " + updatedUser.getId() + " not found"));
+                .orElseThrow(() -> new UserNotFoundException("User with id " + updatedUser.getId() + " not found"));
 
         existingUser.setPassword(updatedUser.getPassword());
         existingUser.setFullName(updatedUser.getFullName());
