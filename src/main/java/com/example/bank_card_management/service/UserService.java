@@ -22,4 +22,12 @@ public class UserService
     {
         return userRepository.findAll();
     }
+
+    public User getASpecificUser(Long userId)
+    {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new RuntimeException("User with id " + userId + " not found"));
+
+        return user;
+    }
 }
