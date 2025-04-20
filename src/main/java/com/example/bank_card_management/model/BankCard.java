@@ -15,7 +15,7 @@ public class BankCard
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String cardNumber;
+    private String encryptedCardNumber;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -23,7 +23,8 @@ public class BankCard
 
     private LocalDate expiryDate;
 
-    private String cardStatus;
+    @Enumerated(EnumType.STRING)
+    private CardStatus cardStatus;
 
     private BigDecimal balance;
 

@@ -1,6 +1,8 @@
 package com.example.bank_card_management.service;
 
 import com.example.bank_card_management.dto.LoginRequest;
+import com.example.bank_card_management.exception.AuthenticationFailedException;
+import com.example.bank_card_management.exception.UserAlreadyExistsException;
 import com.example.bank_card_management.model.User;
 import com.example.bank_card_management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +28,7 @@ public class UserAuthService
     {
         if(userRepository.existsByEmail(user.getEmail()))
         {
-            throw new RuntimeException("User with this email: " + user.getEmail() + " already exists");
+            throw new UserAlreadyExistsException("User with this email: " + user.getEmail() + " already exists");
         }
         else
         {
@@ -49,10 +51,9 @@ public class UserAuthService
         }
         catch (Exception e)
         {
-            throw new RuntimeException("Authentication failed for user: " + loginRequest.getEmail());
+            throw new AuthenticationFailedException("Authentication failed for user: " + loginRequest.getEmail());
         }
         return "FAILED";
     }
-
 
 }
