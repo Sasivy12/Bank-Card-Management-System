@@ -31,4 +31,12 @@ public class GlobalExceptionHandler
 
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(FailedBankCardEncryptionException.class)
+    public ResponseEntity<ErrorResponse> handleFailedBankCardEncryption(FailedBankCardEncryptionException ex)
+    {
+        ErrorResponse errorResponse = new ErrorResponse("ENCRYPTION_FAILED", ex.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
