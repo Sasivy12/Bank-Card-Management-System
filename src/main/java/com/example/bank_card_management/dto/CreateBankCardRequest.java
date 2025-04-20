@@ -7,8 +7,6 @@ import java.time.LocalDate;
 @Data
 public class CreateBankCardRequest
 {
-    private String encryptedCardNumber;
-
     private Long cardHolderId;
 
     private LocalDate expiryDate;

@@ -22,11 +22,16 @@ public class BankCardService
 
     private final UserRepository userRepository;
 
+    private final CardNumberGenerator cardNumberGenerator;
+
     public BankCard createBankCard(CreateBankCardRequest request)
     {
         try
         {
-            String encrypted = encryptionService.encrypt(request.getEncryptedCardNumber());
+            String rawCardNumber = cardNumberGenerator.generateCardNumber();
+            System.out.println(rawCardNumber);
+            String encrypted = encryptionService.encrypt(rawCardNumber);
+
             User user = userRepository.findById(request.getCardHolderId()).orElseThrow(
                     () -> new RuntimeException("User not found"));
 
