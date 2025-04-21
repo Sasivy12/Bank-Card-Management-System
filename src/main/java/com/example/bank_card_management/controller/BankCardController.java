@@ -5,6 +5,7 @@ import com.example.bank_card_management.model.BankCard;
 import com.example.bank_card_management.service.BankCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +29,11 @@ public class BankCardController
     public List<BankCard> getAllBankCards()
     {
         return bankCardService.getAllBankCards();
+    }
+
+    @GetMapping("/my")
+    public List<BankCard> getBankCardsForCurrentUser(Authentication authentication)
+    {
+        return bankCardService.getCardsForCurrentUser(authentication);
     }
 }
