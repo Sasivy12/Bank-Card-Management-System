@@ -7,6 +7,7 @@ import com.example.bank_card_management.model.BankCard;
 import com.example.bank_card_management.service.BankCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class BankCardController
     }
 
     @GetMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public List<BankCard> getAllBankCards()
     {
         return bankCardService.getAllBankCards();
@@ -40,6 +42,7 @@ public class BankCardController
     }
 
     @DeleteMapping()
+    @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#user.id)")
     public ResponseEntity<String> deleteASpecificBankCard(@RequestBody DeleteBankCardRequest request)
     {
         bankCardService.deleteACard(request);
@@ -47,6 +50,7 @@ public class BankCardController
     }
 
     @PutMapping()
+    @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#user.id)")
     public ResponseEntity<String> updateBankCard(@RequestBody UpdateBankCardRequest request)
     {
         bankCardService.updateBankCard(request);

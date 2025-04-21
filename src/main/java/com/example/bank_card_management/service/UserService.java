@@ -1,8 +1,10 @@
 package com.example.bank_card_management.service;
 
+import com.example.bank_card_management.exception.BankCardNotFoundException;
 import com.example.bank_card_management.exception.UserNotFoundException;
 import com.example.bank_card_management.model.BankCard;
 import com.example.bank_card_management.model.User;
+import com.example.bank_card_management.repository.BankCardRepository;
 import com.example.bank_card_management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +17,8 @@ import java.util.List;
 public class UserService
 {
     private final UserRepository userRepository;
+
+    private final BankCardRepository bankCardRepository;
 
     private final AuthenticationManager authManager;
 
@@ -59,5 +63,13 @@ public class UserService
         }
 
         userRepository.save(existingUser);
+    }
+
+    public String getEmailByCardId(Long cardId)
+    {
+        BankCard card = bankCardRepository.findById(cardId)
+                .orElseThrow(() -> new BankCardNotFoundException("Card not found"));
+
+        return card.getCardHolder().getEmail();
     }
 }

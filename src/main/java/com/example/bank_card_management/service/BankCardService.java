@@ -12,6 +12,7 @@ import com.example.bank_card_management.model.User;
 import com.example.bank_card_management.repository.BankCardRepository;
 import com.example.bank_card_management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -112,7 +113,8 @@ public class BankCardService
     public BankCard updateBankCard(UpdateBankCardRequest request)
     {
         BankCard bankCard = bankCardRepository.findById(request.getCardId())
-                .orElseThrow(() -> new BankCardNotFoundException("Bank card with id: " + request.getCardId() + " does not exist"));
+                .orElseThrow(() ->
+                        new BankCardNotFoundException("Bank card with id: " + request.getCardId() + " does not exist"));
 
         if (request.getExpiryDate() != null)
         {
