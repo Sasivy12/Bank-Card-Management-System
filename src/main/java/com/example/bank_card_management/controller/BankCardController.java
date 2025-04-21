@@ -1,6 +1,7 @@
 package com.example.bank_card_management.controller;
 
 import com.example.bank_card_management.dto.CreateBankCardRequest;
+import com.example.bank_card_management.dto.DeleteBankCardRequest;
 import com.example.bank_card_management.model.BankCard;
 import com.example.bank_card_management.service.BankCardService;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +39,8 @@ public class BankCardController
     }
 
     @DeleteMapping()
-    public void deleteASpecificBankCard(@RequestBody BankCard bankCard)
+    public void deleteASpecificBankCard(@RequestBody DeleteBankCardRequest request)
     {
-        bankCardService.deleteACard(bankCard);
+        bankCardService.deleteACard(request);
     }
 }
