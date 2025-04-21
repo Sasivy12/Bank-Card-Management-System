@@ -2,6 +2,7 @@ package com.example.bank_card_management.service;
 
 import com.example.bank_card_management.dto.CreateBankCardRequest;
 import com.example.bank_card_management.dto.DeleteBankCardRequest;
+import com.example.bank_card_management.dto.UpdateBankCardRequest;
 import com.example.bank_card_management.exception.BankCardNotFoundException;
 import com.example.bank_card_management.exception.FailedBankCardEncryptionException;
 import com.example.bank_card_management.exception.UserNotFoundException;
@@ -106,5 +107,28 @@ public class BankCardService
                 () -> new BankCardNotFoundException("Bank card with id: " + request.getCardId() + " does not exist"));
 
         bankCardRepository.delete(bankCard);
+    }
+
+    public BankCard updateBankCard(UpdateBankCardRequest request)
+    {
+        BankCard bankCard = bankCardRepository.findById(request.getCardId())
+                .orElseThrow(() -> new BankCardNotFoundException("Bank card with id: " + request.getCardId() + " does not exist"));
+
+        if (request.getExpiryDate() != null)
+        {
+            bankCard.setExpiryDate(request.getExpiryDate());
+        }
+
+        if (request.getCardStatus() != null)
+        {
+            bankCard.setCardStatus(request.getCardStatus());
+        }
+
+        if (request.getBalance() != null)
+        {
+            bankCard.setBalance(request.getBalance());
+        }
+
+        return bankCardRepository.save(bankCard);
     }
 }

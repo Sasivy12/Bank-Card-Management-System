@@ -2,6 +2,7 @@ package com.example.bank_card_management.controller;
 
 import com.example.bank_card_management.dto.CreateBankCardRequest;
 import com.example.bank_card_management.dto.DeleteBankCardRequest;
+import com.example.bank_card_management.dto.UpdateBankCardRequest;
 import com.example.bank_card_management.model.BankCard;
 import com.example.bank_card_management.service.BankCardService;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +40,16 @@ public class BankCardController
     }
 
     @DeleteMapping()
-    public void deleteASpecificBankCard(@RequestBody DeleteBankCardRequest request)
+    public ResponseEntity<String> deleteASpecificBankCard(@RequestBody DeleteBankCardRequest request)
     {
         bankCardService.deleteACard(request);
+        return ResponseEntity.ok("Card with ID " + request.getCardId() + " deleted successfully");
+    }
+
+    @PutMapping()
+    public ResponseEntity<String> updateBankCard(@RequestBody UpdateBankCardRequest request)
+    {
+        bankCardService.updateBankCard(request);
+        return ResponseEntity.ok("Card with ID " + request.getCardId() + " updated successfully");
     }
 }
