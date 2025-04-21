@@ -36,4 +36,10 @@ public class BankCardController
     {
         return bankCardService.getCardsForCurrentUser(authentication);
     }
+
+    @DeleteMapping()
+    public void deleteASpecificBankCard(@RequestBody BankCard bankCard)
+    {
+        bankCardService.deleteACard(bankCard);
+    }
 }

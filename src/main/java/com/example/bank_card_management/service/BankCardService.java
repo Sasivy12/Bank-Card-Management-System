@@ -97,4 +97,9 @@ public class BankCardService
             return card;
         }).collect(Collectors.toList());
     }
+
+    public void deleteACard(BankCard bankCard)
+    {
+        bankCardRepository.delete(bankCard);
+    }
 }
