@@ -13,7 +13,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/bank_card
       SPRING_DATASOURCE_USERNAME: super
       SPRING_DATASOURCE_PASSWORD: tim123
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
       SPRINGDOC_API_DOCS_ENABLED: "true"
       SPRINGDOC_SWAGGER_UI_ENABLED: "true"
     depends_on:

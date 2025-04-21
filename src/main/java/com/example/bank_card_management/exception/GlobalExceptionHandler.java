@@ -39,4 +39,12 @@ public class GlobalExceptionHandler
 
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(BankCardNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleBankCardNotFound(BankCardNotFoundException ex)
+    {
+        ErrorResponse errorResponse = new ErrorResponse("BANKCARD_NOT_FOUND", ex.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
 }

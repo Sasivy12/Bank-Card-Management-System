@@ -1,5 +1,6 @@
 package com.example.bank_card_management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class BankCard
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties("cards")
     private User cardHolder;
 
     private LocalDate expiryDate;

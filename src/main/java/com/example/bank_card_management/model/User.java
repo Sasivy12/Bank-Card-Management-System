@@ -1,5 +1,6 @@
 package com.example.bank_card_management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,6 +25,7 @@ public class User
 
     private String status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cardHolder", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BankCard> cards;
 
