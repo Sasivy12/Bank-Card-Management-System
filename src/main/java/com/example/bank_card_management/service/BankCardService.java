@@ -61,7 +61,19 @@ public class BankCardService
 
     public List<BankCard> getAllBankCards()
     {
-        return bankCardRepository.findAll();
+        return bankCardRepository.findAll().stream().map(card ->
+        {
+            try
+            {
+                String decrypted = encryptionService.decrypt(card.getEncryptedCardNumber());
+                card.setEncryptedCardNumber("**** **** **** " + decrypted.substring(decrypted.length() - 4));
+            }
+            catch (Exception e)
+            {
+                card.setEncryptedCardNumber("**** **** **** ****");
+            }
+            return card;
+        }).collect(Collectors.toList());
     }
 
     public List<BankCard> getCardsForCurrentUser(Authentication authentication)
@@ -82,7 +94,6 @@ public class BankCardService
             {
                 card.setEncryptedCardNumber("**** **** **** ****");
             }
-            card.setCardHolder(null);
             return card;
         }).collect(Collectors.toList());
     }
