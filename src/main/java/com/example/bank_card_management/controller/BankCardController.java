@@ -1,13 +1,13 @@
 package com.example.bank_card_management.controller;
 
 import com.example.bank_card_management.dto.CreateBankCardRequest;
+import com.example.bank_card_management.model.BankCard;
 import com.example.bank_card_management.service.BankCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,5 +22,11 @@ public class BankCardController
         bankCardService.createBankCard(request);
 
         return ResponseEntity.ok("Card successfully created for user: " + request.getCardHolderId());
+    }
+
+    @GetMapping()
+    public List<BankCard> getAllBankCards()
+    {
+        return bankCardService.getAllBankCards();
     }
 }

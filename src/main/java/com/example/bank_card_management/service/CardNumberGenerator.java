@@ -32,7 +32,8 @@ public class CardNumberGenerator
     private int getLuhnCheckDigit(int[] digits)
     {
         int sum = 0;
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 15; i++)
+        {
             int digit = digits[14 - i];
             if (i % 2 == 0)
             {

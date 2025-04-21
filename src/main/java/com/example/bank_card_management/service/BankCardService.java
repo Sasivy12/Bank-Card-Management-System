@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -53,5 +54,10 @@ public class BankCardService
     private String maskCardNumber(String cardNumber)
     {
         return "**** **** **** " + cardNumber.substring(cardNumber.length() - 4);
+    }
+
+    public List<BankCard> getAllBankCards()
+    {
+        return bankCardRepository.findAll();
     }
 }
