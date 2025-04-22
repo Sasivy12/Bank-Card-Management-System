@@ -1,11 +1,14 @@
 package com.example.bank_card_management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "bankcard")
@@ -29,5 +32,13 @@ public class BankCard
     private CardStatus cardStatus;
 
     private BigDecimal balance;
+
+    @OneToMany(mappedBy = "sourceCard", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Transaction> outgoingTransactions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "destinationCard", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Transaction> incomingTransactions = new ArrayList<>();
 
 }
