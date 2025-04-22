@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "user_")
 @Data
-@Schema(description = "Пользователь системы")
+@Schema(title = "User", description = "Пользователь системы")
 public class User
 {
     @Id

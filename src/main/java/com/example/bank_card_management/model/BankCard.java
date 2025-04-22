@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "bankcard")
 @Data
-@Schema(description = "Банковская карта пользователя")
+@Schema(title = "BankCard",description = "Банковская карта пользователя")
 public class BankCard
 {
     @Id

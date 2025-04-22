@@ -7,7 +7,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-@Schema(description = "Запрос на создание транзакции между банковскими картами")
+@Schema(title = "CreateTransactionRequest", description = "Запрос на перевод средств")
 public class CreateTransactionRequest
 {
     @Schema(description = "Описание транзакции")

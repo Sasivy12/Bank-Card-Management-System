@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-@Schema(description = "Запрос на создание новой банковской карты")
+@Schema(title = "CreateBankCardRequest", description = "Запрос на создание банковской карты")
 public class CreateBankCardRequest
 {
     @Schema(description = "ID владельца карты")

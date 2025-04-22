@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "transaction")
 @Data
-@Schema(description = "Транзакция между банковскими картами")
+@Schema(title = "Transaction",description = "Транзакция между банковскими картами")
 public class Transaction
 {
     @Id

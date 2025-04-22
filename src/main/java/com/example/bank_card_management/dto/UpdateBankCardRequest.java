@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@Schema(description = "Запрос на обновление данных банковской карты")
+@Schema(title = "UpdateBankCardRequest",description = "Запрос на обновление данных банковской карты")
 public class UpdateBankCardRequest
 {
     @Schema(description = "ID карты")
