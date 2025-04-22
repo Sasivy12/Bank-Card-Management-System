@@ -47,4 +47,20 @@ public class GlobalExceptionHandler
 
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(InsufficientCardBalanceException.class)
+    public ResponseEntity<ErrorResponse> InsufficientCardBalance(InsufficientCardBalanceException ex)
+    {
+        ErrorResponse errorResponse = new ErrorResponse("INSUFFICIENT_BALANCE", ex.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(InactiveCardException.class)
+    public ResponseEntity<ErrorResponse> handleInactiveCard(InactiveCardException ex)
+    {
+        ErrorResponse errorResponse = new ErrorResponse("INACTIVE_CARD", ex.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
 }
