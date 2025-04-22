@@ -6,10 +6,9 @@ import com.example.bank_card_management.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +23,12 @@ public class TransactionController
             (@RequestBody CreateTransactionRequest createTransactionRequest, Authentication auth)
     {
         return transactionService.createTransaction(createTransactionRequest);
+    }
+
+    @GetMapping()
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<Transaction> getAllTransactions()
+    {
+        return transactionService.getAllTransactions();
     }
 }
