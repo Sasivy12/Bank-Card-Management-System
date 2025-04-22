@@ -5,6 +5,7 @@ import com.example.bank_card_management.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,8 +31,8 @@ public class UserController
     }
 
     @DeleteMapping()
-    @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#user.id)")
-    public ResponseEntity<String> deleteASpecificUser(@RequestBody User user)
+    @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#request.cardId)")
+    public ResponseEntity<String> deleteASpecificUser(@RequestBody User user, Authentication auth)
     {
         userService.deleteASpecificUser(user);
 
@@ -39,8 +40,8 @@ public class UserController
     }
 
     @PutMapping()
-    @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#user.id)")
-    public ResponseEntity<String> updateASpecificUser(@RequestBody User user)
+    @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#request.cardId)")
+    public ResponseEntity<String> updateASpecificUser(@RequestBody User user, Authentication auth)
     {
         userService.updateASpecificUser(user);
 

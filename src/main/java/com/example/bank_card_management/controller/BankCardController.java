@@ -43,15 +43,17 @@ public class BankCardController
 
     @DeleteMapping()
     @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#user.id)")
-    public ResponseEntity<String> deleteASpecificBankCard(@RequestBody DeleteBankCardRequest request)
+    public ResponseEntity<String> deleteASpecificBankCard
+            (@RequestBody DeleteBankCardRequest request, Authentication auth)
     {
         bankCardService.deleteACard(request);
         return ResponseEntity.ok("Card with ID " + request.getCardId() + " deleted successfully");
     }
 
     @PutMapping()
-    @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#user.id)")
-    public ResponseEntity<String> updateBankCard(@RequestBody UpdateBankCardRequest request)
+    @PreAuthorize("hasRole('ADMIN') or #auth.name == @userService.getEmailByCardId(#request.cardId)")
+    public ResponseEntity<String> updateBankCard
+            (@RequestBody UpdateBankCardRequest request, Authentication auth)
     {
         bankCardService.updateBankCard(request);
         return ResponseEntity.ok("Card with ID " + request.getCardId() + " updated successfully");
