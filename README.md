@@ -12,6 +12,7 @@
 - Maven
 - Swagger (SpringDoc OpenAPI)
 - JUnit + Mockito
+- Liquibase
 
 ---
 
