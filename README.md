@@ -39,4 +39,4 @@
    http://localhost:8081
 4. Swagger UI:
 ```bash
-  http://localhost:8081/swagger-ui/index.html
+   http://localhost:8081/swagger-ui/index.html
